@@ -1,0 +1,64 @@
+Q1 -> What is JPA?
+A  -> Java Persistence API
+	Standard API for ORM
+
+	Only a specification
+		Defines a set of interfaces
+		Requires an implementation to be usable
+		
+Q2 -> WHat are some JPA Vendor Implementations?
+A  -> Hibernate			and 		EclipseLink
+
+Q3 -> Define Auto Data Source Configuration in Spring Boot?
+A  -> In Spring Boot, Hibernate is default implementation of JPA
+	EntityManager is similar to Hibernate SessionFactory
+	EntityManager can serve as a wrapper for a Hibernate Session object
+	We can inject EntityManager into our DAO
+	
+Q4 -> Whata re the various DAO Techniques?
+A  -> Different versions are:
+	1.	Use EntityManager but leverage native Hibernate API
+	2.	Use EntityManager and standard JPA API
+	3.	Spring Data JPA
+	
+Q5 -> Compare JPA to Native Hibernate Methods?
+A  -> Here are some Points:
+	1.	Create/save new entity:
+			Hibernate -> session.save()
+			JPA -> entityManager.persist()
+	2.	Retrieve entity by id:
+			session.get() / load()
+			entityManager.find()
+	3.	Retrieve list of entities:
+			session.createQuery()
+			entityManager.createQuery()
+	4.	Save or update entity:
+			session.saveOrUpdate()
+			entityManager.merge()
+	5.	Delete entity:
+			session.delete()
+			entityManager.remove()
+			
+		
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
