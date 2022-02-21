@@ -86,11 +86,26 @@ A 	-> A first-class citizen (sometimes called first-class objects) is an entity 
 
 Q13 -> What are closures?
 A 	-> A closure is a record storing a function together with an environment: a mapping associating each free variable of the function with the value or storage location to which the name was bound when the closure was created. A closure, allows the function to access these captured variables through the closure's reference to them, even when the function is invoked outside their scope.
+	<script>
+		myFunction();
+		document.getElementById("demo").innerHTML = a * a;
+
+		function myFunction() {
+			a = 4;
+		} 
+	</script>
 
 Q14 -> What is Lambda Expression?
 A 	-> The Expression through which we can represent an Anonymous function.
 	1.	Anonymous: Nameless/Unknown 
 	2.	Anonymous Function: A method who dont have any name or modifier.
+	<script>
+		var greet = function () {
+			console.log("Welcome to GeeksforGeeks!");
+		};
+		
+		greet();
+	</script>
 
 Q15 -> Can we write Lambda Expression for every method?
 A 	-> No.
@@ -104,11 +119,11 @@ A 	-> Stream API is used to process collections of objects.
 	A stream is a sequence of objects that supports various methods 
 	which can be pipelined to produce the desired result.
 
-	A stream is not  adata structure instead it takes input from the Collections,
+	A stream is not a data structure instead it takes input from the Collections,
 	Arrays or I/O channels.
 
 	Streams dont change the original data structure, they only provide the result
-	as per teh piplelined methods.
+	as per the piplelined methods.
 
 Q17 -> Explain filter and forEach methods?
 A 	-> filter - for conditional check
@@ -157,30 +172,72 @@ A 	-> Collections.sort(list); // ascending
 
 Q19 -> How to sort a map using lambda?
 A 	-> 
-	List<Entry<String, Integer>> entries = new ArrayList<>(map.entrySet());
-	Collections.sort(entries, new Comparator)
+	public class Employee implements Comparable<Employee> {
 
-	Collections.sort(entries, (o1, o2) -> o1.getKey().compareTo(o2.getKey()));
+	    private Long id;
+	    private String name;
 
-	Using stream api now,
+	    // constructor, getters, setters
 
-	map.entrySet().stream()
-		.sorted(Map.Entry.comparingByKey().reverse())
-		.forEach(t -> sysout(t));
+	    // override equals and hashCode
+	    @Override
+	    public int compareTo(Employee employee) {
+	        return (int)(this.id - employee.getId());
+	    }
+	}
 
-	map.entrySet().stream()
-		.sorted(Map.Entry.comparingByValue())
-		.forEach(t -> sysout(t));
+	Map<String, Employee> map = new HashMap<>();
 
-	// comparingByKey and comparingByValue has two overloaded methods 
-	// one no args other with comparator
+	Employee employee1 = new Employee(1L, "Mher");
+	map.put(employee1.getName(), employee1);
+	Employee employee2 = new Employee(22L, "Annie");
+	map.put(employee2.getName(), employee2);
+	Employee employee3 = new Employee(8L, "John");
+	map.put(employee3.getName(), employee3);
+	Employee employee4 = new Employee(2L, "George");
+	map.put(employee4.getName(), employee4);
+
+	1.	Using a TreeMap:
+		keys in TreeMap are sorted using their natural order.
+
+		TreeMap<String, Employee> sorted = new TreeMap<>(map);
+
+
+	2.	Using ArrayList:
+		List<String> employeeByKey = new ArrayList<>(map.keySet());
+		Collections.sort(employeeByKey);
+
+
+	3.	Sort by Value:
+		List<Employee> employeeById = new ArrayList<>(map.values());
+		Collections.sort(employeeById);
+
+	4.	Using a TreeSet:
+		SortedSet<String> keySet = new TreeSet<>(map.keySet());
+		SortedSet<Employee> values = new TreeSet<>(map.values());
+
+	5.	Using Lambdas and Streams:
+		Since the Java 8, we can use the Stream API and lambda expressions to sort the map. All we need is to call the sorted method over the map's stream pipeline.
+
+		map.entrySet()
+		  .stream()
+		  .sorted(Map.Entry.<String, Employee>comparingByKey())
+		  .forEach(System.out::println);
+
+		map.entrySet()
+		  .stream()
+		  .sorted(Map.Entry.comparingByValue())
+		  .forEach(System.out::println);
+
+
+	
 
 Q20 -> Difference between map() and flatMap() method?
 A 	-> Both these methods are intermediate methods 
 	and returns another stream as part of the output.
 
 	map() method used for transformation.
-	takes Stream<T> as inout and return Stream<R>
+	takes Stream<T> as input and return Stream<R>
 	Its mapper function produces one value for each input value.
 	hence it is also called One-to-One mapping
 
@@ -236,7 +293,7 @@ A 	-> Optional is a container object used to contain not-null objects.
 	Customer customer = new Customer(101, john, null, Arrays.asList("23323", "323"));
 
 	Optional<Object> emptyOptional = Optional.empty();
-	sysout(emptyOptional); // we will get ptional.empty()
+	sysout(emptyOptional); // we will get optional.empty()
 
 	Optional<String> emailOptional1 = Optional.of(customer.getEmail());
 	sysout(emailOptional1);
@@ -264,7 +321,7 @@ A 	-> Optional is a container object used to contain not-null objects.
 
 Q22 -> What is Map-Reduce?
 A 	-> Map --> Transforming data.
-	Transform Stream[Object] to Stram of int
+	Transform Stream[Object] to Stream of int
 
 
 	Reduce --> Aggregating data.
@@ -300,6 +357,157 @@ A  	-> Java Parallel Streams is a feature of Java 8.
 	IntStream.range(1, 100).Parallel().forEach(System.out::println);
 	end = System.currenttiomeMillis();
 	sysout("Parallel Time taken: " + (end - start));
+
+Q24 -> What is diamond problem?
+A 	-> Suppose you have the both Animals and Animals1 implementing the same interface IAnimals:
+	interface IAnimals
+	{
+		public string eat();
+	}
+
+	abstract class Animals implements IAnimals
+	{
+		public abstract void run();
+		public string eat(){ return "Animals eating"; } 
+	}
+
+	abstract class Animals1 implements IAnimals
+	{
+		public abstract void run1();
+		public string eat(){ return "Animals1 eating"; } 
+	}
+
+	If you now define your Dog class:
+
+	class Dog extends Animals,Animals1
+	{
+	public void run() {System.out.println("Run method");}
+	public void run1() {System.out.println("Run1 method");}
+	}
+
+	It will have the method eat() too, which is not abstract so it can use it directly. 
+	What would be the return of this method for a dog? Which string will be returned, the one with Animals, or the one with Animals1?
+
+
+Q27 -> What is entry interface in Java?
+A 	-> Map.Entry interface in Java provides certain methods to access the entry in the Map.
+
+
+
+Q26 -> What is entrySet And KeySet in maps?
+A 	-> Let's create and initialize a HashMap whose key is of type String and value is of type Integer:
+	
+	Map<String, Integer> map = new HashMap<>();
+	map.put("one", 1);
+	map.put("two", 2);
+
+	The keySet() Method:
+	The keySet() method returns the Set of keys contained in the Map. 
+		Set<String> actualValues = map.keySet();
+
+		assertEquals(2, actualValues.size());
+
+	The entrySet() Method:
+	The entrySet() method returns the set of key-value mappings. 
+	Set<Map.Entry<String, Integer>> actualValues = map.entrySet
+
+	assertTrue(actualValues.contains(new SimpleEntry<>("one", 1)));
+	assertTrue(actualValues.contains(new SimpleEntry<>("two", 2)));
+
+	Here, we've chosen the AbstractMap.SimpleEntry implementation of the interface Map.Entry for our test.
+
+
+Q27 -> What is Comparator and Comparable in Java?
+A   -> They are interfaces.
+
+	Comparable:
+	public class Player implements Comparable<Player> {
+
+	    private int ranking;
+	    private String name;
+	    private int age;
+	    
+	    // constructor, getters, setters  
+
+
+	    @Override
+	    public int compareTo(Player otherPlayer) {
+	        return Integer.compare(getRanking(), otherPlayer.getRanking());
+	    }
+
+	}
+
+	public static void main(String[] args) {
+	    List<Player> footballTeam = new ArrayList<>();
+	    Player player1 = new Player(59, "John", 20);
+	    Player player2 = new Player(67, "Roger", 22);
+	    Player player3 = new Player(45, "Steven", 24);
+	    footballTeam.add(player1);
+	    footballTeam.add(player2);
+	    footballTeam.add(player3);
+
+	    System.out.println("Before Sorting : " + footballTeam);
+	    Collections.sort(footballTeam);
+	    System.out.println("After Sorting : " + footballTeam);
+	}
+
+
+	------------------------------------------------
+
+	Comparator:
+	The Comparator interface defines a compare(arg1, arg2) method with two arguments that represent compared objects, and works similarly to the Comparable.compareTo() method.
+
+	To create a Comparator, we have to implement the Comparator interface.
+
+	For our first example, we'll create a Comparator to use the ranking attribute of Player to sort the players:
+
+	public class PlayerRankingComparator implements Comparator<Player> {
+
+	    @Override
+	    public int compare(Player firstPlayer, Player secondPlayer) {
+	       return Integer.compare(firstPlayer.getRanking(), secondPlayer.getRanking());
+	    }
+
+	}
+	Similarly, we can create a Comparator to use the age attribute of Player to sort the players:
+
+	public class PlayerAgeComparator implements Comparator<Player> {
+
+	    @Override
+	    public int compare(Player firstPlayer, Player secondPlayer) {
+	       return Integer.compare(firstPlayer.getAge(), secondPlayer.getAge());
+	    }
+
+	}
+
+	Using this approach, we can override the natural ordering:
+
+	PlayerRankingComparator playerComparator = new PlayerRankingComparator();
+	Collections.sort(footballTeam, playerComparator);
+
+	If we want a different sorting order, we only need to change the Comparator we're using
+
+	The Comparable interface is a good choice to use for defining the default ordering, or in other words, if it's the main way of comparing objects.
+
+	Sometimes we can't modify the source code of the class whose objects we want to sort, thus making the use of Comparable impossible
+
+
+	NOTE: Avoiding the Subtraction Trick
+	Comparator<Player> comparator = (p1, p2) -> p1.getRanking() - p2.getRanking();
+	Although it's much more concise than other solutions, it can be a victim of integer overflows in Java:
+
+	However, due to integer overflow, the “Integer.MAX_VALUE – (-1)” will be less than zero. 
+
+
+
+	
+
+
+
+
+
+
+
 
 
 

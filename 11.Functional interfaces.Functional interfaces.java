@@ -10,7 +10,7 @@ It has annotation @FunctionalInterface
 
 Q1 -> What is Consumer Functional Interface?
 A  -> Consumer<T> is an in-built functional interface introduced in Java 8. Consumer can be used in all contexts where an object needs to be consumed i.e., 
-	taken as input, and some opeartion is to be performed on the object without returning any result.
+	taken as input, and some operation is to be performed on the object without returning any result.
 
 	void accept(T t);
 
@@ -34,7 +34,7 @@ A  -> Consumer<T> is an in-built functional interface introduced in Java 8. Cons
 
 Q2 -> What is Predicate Functional Interface?
 A  -> This interface is used for conditional check
-	where you think, we can use thse true/false returning functions in daya to day programming we should choose Predicate.
+	where you think, we can use these true/false returning functions in day to day programming we should choose Predicate.
 
 	boolean test(T t);
 
@@ -137,6 +137,8 @@ Q5 -> Explain Comparator FunctionalInterface?
 A  -> A comparator interface is used to order the objects of user-defined classes.
 	A comparator object is capable of comparing two objects of two different classes. Following function compare obj1 with obj2
 	This interface is present in java.util package and contains 2 methods compare(Object obj1, Object obj2) and equals(Object element).
+
+	The equals is an abstract method overriding one of the public methods of java.lang.Object, this doesn’t count as an abstract method.
 
 	Method of Collections class for sorting List elements is used to sort the elements of List by the given comparator.
 	// To sort a given list. ComparatorClass must implement 
