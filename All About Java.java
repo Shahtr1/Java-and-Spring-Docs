@@ -499,6 +499,45 @@ A   -> They are interfaces.
 	However, due to integer overflow, the “Integer.MAX_VALUE – (-1)” will be less than zero. 
 
 
+Q28 -> What is Java equals() and hashCode() Contract?
+A 	-> The Object class defines both the equals() and hashCode() methods – which means that these two methods are implicitly defined in every Java class, including the ones we create:
+	
+	class Money {
+	    int amount;
+	    String currencyCode;
+	}
+
+	Money income = new Money(55, "USD");
+	Money expenses = new Money(55, "USD");
+	boolean balanced = income.equals(expenses)
+
+	@Override
+	public boolean equals(Object o) {
+	    if (o == this)
+	        return true;
+	    if (!(o instanceof Money))
+	        return false;
+	    Money other = (Money)o;
+	    boolean currencyCodeEquals = (this.currencyCode == null && other.currencyCode == null)
+	      || (this.currencyCode != null && this.currencyCode.equals(other.currencyCode));
+	    return this.amount == other.amount && currencyCodeEquals;
+	}
+
+
+	equals() Contract:
+	Java SE defines a contract that our implementation of the equals() method must fulfill. Most of the criteria are common sense. The equals() method must be:
+		reflexive: an object must equal itself
+		symmetric: x.equals(y) must return the same result as y.equals(x)
+		transitive: if x.equals(y) and y.equals(z) then also x.equals(z)
+		consistent: the value of equals() should change only if a property that is contained in equals() changes (no randomness allowed)
+
+	---------------------------------------------------------------------------------------------
+
+	hashCode():
+	hashCode() returns an integer representing the current instance of the class. 
+	We should calculate this value consistent with the definition of equality for the class. Thus if we override the equals() method, we also have to override hashCode().
+
+	
 
 	
 
