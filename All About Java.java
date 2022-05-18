@@ -537,9 +537,173 @@ A 	-> The Object class defines both the equals() and hashCode() methods – whic
 	hashCode() returns an integer representing the current instance of the class. 
 	We should calculate this value consistent with the definition of equality for the class. Thus if we override the equals() method, we also have to override hashCode().
 
-	
+Q29 -> What is Association, Aggregation and Composition?
+A 	-> Association is a relation between two separate classes which establishes through their Objects. 
+Association can be one-to-one, one-to-many, many-to-one, many-to-many. 
+In Object-Oriented programming, an Object communicates to another object to use functionality and services provided by that object. 
+Composition and Aggregation are the two forms of association. 
 
-	
+Aggregation:
+It is a special form of Association where:
+-	It represents Has-A’s relationship.
+-	It is a unidirectional association i.e. a one-way relationship.
+-	In Aggregation, both the entries can survive individually which means ending one entity will not affect the other entity.
+
+Composition:
+Composition is a restricted form of Aggregation in which two entities are highly dependent on each other. 
+-	It represents "part-of" relationship.
+-	In composition, both entities are dependent on each other.
+-	The composed object cannot exist without the other entity.
+
+Composition is a strong Association whereas Aggregation is a weak Association.
+
+Q30 -> Why are companies still stuck with Java 8?
+A 	-> Mix of different reasons:
+	-	Build tools (Maven, Gradle etc.) and some libraries initially had bugs with versions Java versions > 8 and needed updates. 
+	Even today, with e.g. Java >=9, certain build tools print out "reflective access"-warnings when building Java projects, 
+	which simply "feels not ready", even though the builds are fine.
+
+Q31 -> Why are some Java versions, like 8 also called 1.8?
+A 	-> With the switch to time-based releases with Java 9 the naming scheme also changed, and Java versions aren’t prefixed with 1.x anymore.
+
+Q32 -> What is the difference between a JRE and a JDK?
+A 	-> Historically, you downloaded just a JRE if you were only interested in running Java programs. 
+A JRE includes, among other things, the Java Virtual Machine (JVM) and the "java" command line tool.
+
+To develop new Java programs, you needed to download a JDK. 
+A JDK includes everything the JRE has, as well as the compiler javac and a couple of other tools like javadoc (Java documentation generator) and jdb (Java Debugger).
+
+Up until Java 8, the Oracle website offered JREs and JDKs as separate downloads - even though the JDK also always included a JRE in a separate folder.
+With Java 9 that distinction was basically gone, and you are always downloading a JDK. The directory structure of JDKs also changed, with not having an explicit JRE folder anymore.
+
+Q33 -> Explain all Java Features 8-17?
+A 	-> Here’s a quick overview of what the specific versions have to offer:
+	-	Java 8:
+		-	Language Features: Lambdas etc.
+			Before Java 8, whenever you wanted to instantiate, for example, a new Runnable, you had to write an anonymous inner class like so:
+
+				Runnable runnable = new Runnable(){
+			       @Override
+			       public void run(){
+			         System.out.println("Hello world !");
+			       }
+			    };
+
+			With lambdas, the same code looks like this:
+				Runnable runnable = () -> System.out.println("Hello world two!");
+
+		-	Collections & Streams
+			In Java 8 you also got functional-style operations for collections, also known as the Stream API.
+
+	-	Java 9:
+		-	Collections:
+			Collections got a couple of new helper methods, to easily construct Lists, Sets and Maps.
+
+				List<String> list = List.of("one", "two", "three");
+				Set<String> set = Set.of("one", "two", "three");
+				Map<String, String> map = Map.of("foo", "one", "bar", "two");
+
+		-	Streams:
+			Streams got a couple of additions, in the form of takeWhile,dropWhile,iterate methods.
+
+			// create a stream of numbers from 1 to 10
+	        Stream<Integer> stream
+	            = Stream.of(4, 4, 4, 5, 6, 7, 8, 9, 10);
+	  
+	        // apply takeWhile to take all the numbers
+	        // matches passed predicate
+	        List<Integer> list
+	            = stream.takeWhile(number -> (number / 4 == 1))
+	                  .collect(Collectors.toList());
+
+	    -	Optionals got the sorely missed ifPresentOrElse method.
+
+	    	// create a Optional
+	        Optional<Integer> op
+	            = Optional.of(9455);
+	  
+	        // print value
+	        System.out.println("Optional: "
+	                           + op);
+	  
+	        // apply ifPresentOrElse
+	        op.ifPresentOrElse(
+	            (value)
+	                -> { System.out.println(
+	                         "Value is present, its: "
+	                         + value); },
+	            ()
+	                -> { System.out.println(
+	                         "Value is empty"); });
+
+	    -	Interfaces got private methods
+
+	-	Java 10:
+		-	There have been a few changes to Java 10, like Garbage Collection etc. 
+		But the only real change you as a developer will likely see is the introduction of the "var"-keyword, also called local-variable type inference.
+
+	-	Java 11:
+		-	Strings got a couple new methods
+
+			"Marco".isBlank();
+			"Mar\nco".lines();
+			"Marco  ".strip();
+
+	-	Java 12:
+		-	Unicode 11 support and a preview of the new switch expression
+			While ASCII uses only 1 byte the Unicode uses 4 bytes to represent characters.
+
+	-	Java 13:
+		-	Unicode 12.1 support
+		
+		-	Switch statements look like this
+
+			boolean result = switch (status) {
+			    case SUBSCRIBER -> true;
+			    case FREE_TRIAL -> false;
+			    default -> throw new IllegalArgumentException("something is murky!");
+			};
+
+		-	Multiline Strings:
+			String htmlWithJava13 = """
+              <html>
+                  <body>
+                      <p>Hello, world</p>
+                  </body>
+              </html>
+              """;
+
+
+Q34 -> What is difference between ArrayList and LinkedList?
+A 	-> ArrayList and LinkedList both implement the List interface and maintain insertion order.
+
+							ArrayList																		LinkedList
+
+	ArrayList internally uses a dynamic array to store the elements						LinkedList internally uses a doubly linked list to store the elements.
+
+	Manipulation with ArrayList is slow because it internally uses an array. 			Manipulation with LinkedList is faster than ArrayList because it uses a doubly linked list,
+	If any element is removed from the array, 											so no bit shifting is required in memory.
+	all the other elements are shifted in memory.
+
+	An ArrayList class can act as a list only because it implements List only.			LinkedList class can act as a list and queue both because it implements List and Deque interfaces.
+
+	ArrayList is better for storing and accessing data.									LinkedList is better for manipulating data.
+
+	The memory location for the elements of an ArrayList is contiguous.					The location for the elements of a linked list is not contagious.
+
+	Generally, when an ArrayList is initialized, 										There is no case of default capacity in a LinkedList.
+	a default capacity of 10 is assigned to the ArrayList.
+
+
+	-	When the rate of addition or removal rate is more than the read scenarios, then go for the LinkedList.
+	-	Since the elements of an ArrayList are stored more compact as compared to a LinkedList; therefore, the ArrayList is more cache-friendly as compared to the LinkedList. 
+		Thus, chances for the cache miss are less in an ArrayList as compared to a LinkedList. Generally, it is considered that a LinkedList is poor in cache-locality.
+
+	-	Memory overhead in the LinkedList is more as compared to the ArrayList. It is because, in a LinkedList, 
+		we have two extra links (next and previous) as it is required to store the address of the previous and the next nodes, 
+		and these links consume extra space. Such links are not present in an ArrayList.
+
+		
 
 
 
