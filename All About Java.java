@@ -2,7 +2,8 @@ Q1 -> What are default methods?
 A  -> Before Java 8, interfaces could have only abstract methods.
 	The implementation of these methods has to be provided in a separate class.
 	 So, if a new method is to be added in an interface, then its implementation code has to be provided in the class implementing the same interface
-	 To overcome this issue, Java 8 has introduced the concept of default methods which allow the interfaces to have methods with implementation without affecting the classes that implement the interface.
+	 To overcome this issue, Java 8 has introduced the concept of default methods which allow the interfaces to have methods with implementation
+	  without affecting the classes that implement the interface.
 
 Q2 -> Static methods in interfaces?
 A  -> The interfaces can have static methods as well which is similar to static method of classes.
@@ -35,7 +36,8 @@ A  -> A wrapper class is an object that encapsulates a primitive type. Each prim
 	This behavior is important to understand when you are choose between using a primitive type or a wrapper object.
 
 	Wrapper Objects are Immutable:
-		All primitive wrapper objects in Java are final, which means they are immutable. When a wrapper object get its value modified, the compiler must create a new object and then reassign that object to the original.
+		All primitive wrapper objects in Java are final, which means they are immutable. When a wrapper object get its value modified, 
+		the compiler must create a new object and then reassign that object to the original.
 
 	public void addOne(Integer i) {
 	  i = i + 1;
@@ -82,10 +84,13 @@ Q11 -> What are First-Class Functions?
 A 	-> A Programming language is said to have first-class functions if it treats functions as first-class citizens.
 
 Q12 -> What is a First-Class Citizen?
-A 	-> A first-class citizen (sometimes called first-class objects) is an entity which supports all the operations generally available to other entities. These operations typically include being passed as an argument, returned froma  function, and assigned to a variable.
+A 	-> A first-class citizen (sometimes called first-class objects) is an entity which supports all the operations generally available to other entities. 
+These operations typically include being passed as an argument, returned froma  function, and assigned to a variable.
 
 Q13 -> What are closures?
-A 	-> A closure is a record storing a function together with an environment: a mapping associating each free variable of the function with the value or storage location to which the name was bound when the closure was created. A closure, allows the function to access these captured variables through the closure's reference to them, even when the function is invoked outside their scope.
+A 	-> A closure is a record storing a function together with an environment: a mapping associating each free variable of the function 
+with the value or storage location to which the name was bound when the closure was created. 
+A closure, allows the function to access these captured variables through the closure's reference to them, even when the function is invoked outside their scope.
 	<script>
 		myFunction();
 		document.getElementById("demo").innerHTML = a * a;
@@ -124,6 +129,8 @@ A 	-> Stream API is used to process collections of objects.
 
 	Streams dont change the original data structure, they only provide the result
 	as per the piplelined methods.
+
+	// check functional interfaces file first
 
 Q17 -> Explain filter and forEach methods?
 A 	-> filter - for conditional check
@@ -242,7 +249,7 @@ A 	-> Both these methods are intermediate methods
 	hence it is also called One-to-One mapping
 
 	flatMap() used for transformation & flattening.
-	takes Stream of stream as input and return Stream 
+	takes Stream of streams as input and return Stream 
 	Its mapper function produces multiple value for each input value.
 	hence it is also called One-to-Many mapping
 
@@ -500,7 +507,8 @@ A   -> They are interfaces.
 
 
 Q28 -> What is Java equals() and hashCode() Contract?
-A 	-> The Object class defines both the equals() and hashCode() methods – which means that these two methods are implicitly defined in every Java class, including the ones we create:
+A 	-> The Object class defines both the equals() and hashCode() methods – which means that these two methods are implicitly defined in every Java class, 
+including the ones we create:
 	
 	class Money {
 	    int amount;
@@ -510,6 +518,8 @@ A 	-> The Object class defines both the equals() and hashCode() methods – whic
 	Money income = new Money(55, "USD");
 	Money expenses = new Money(55, "USD");
 	boolean balanced = income.equals(expenses)
+
+	// The default implementation of equals() in the Object class says that equality is the same as object identity, and income and expenses are two distinct instances.
 
 	@Override
 	public boolean equals(Object o) {
@@ -536,6 +546,9 @@ A 	-> The Object class defines both the equals() and hashCode() methods – whic
 	hashCode():
 	hashCode() returns an integer representing the current instance of the class. 
 	We should calculate this value consistent with the definition of equality for the class. Thus if we override the equals() method, we also have to override hashCode().
+	-	internal consistency: the value of hashCode() may only change if a property that is in equals() changes
+	-	equals consistency: objects that are equal to each other must return the same hashCode
+	-	collisions: unequal objects may have the same hashCode
 
 Q29 -> What is Association, Aggregation and Composition?
 A 	-> Association is a relation between two separate classes which establishes through their Objects. 
@@ -574,9 +587,10 @@ To develop new Java programs, you needed to download a JDK.
 A JDK includes everything the JRE has, as well as the compiler javac and a couple of other tools like javadoc (Java documentation generator) and jdb (Java Debugger).
 
 Up until Java 8, the Oracle website offered JREs and JDKs as separate downloads - even though the JDK also always included a JRE in a separate folder.
-With Java 9 that distinction was basically gone, and you are always downloading a JDK. The directory structure of JDKs also changed, with not having an explicit JRE folder anymore.
+With Java 9 that distinction was basically gone, and you are always downloading a JDK. The directory structure of JDKs also changed, 
+with not having an explicit JRE folder anymore.
 
-Q33 -> Explain all Java Features 8-17?
+Q33 -> Explain all Java Features 8-13?
 A 	-> Here’s a quick overview of what the specific versions have to offer:
 	-	Java 8:
 		-	Language Features: Lambdas etc.
@@ -703,7 +717,7 @@ A 	-> ArrayList and LinkedList both implement the List interface and maintain in
 		we have two extra links (next and previous) as it is required to store the address of the previous and the next nodes, 
 		and these links consume extra space. Such links are not present in an ArrayList.
 
-		
+
 
 
 

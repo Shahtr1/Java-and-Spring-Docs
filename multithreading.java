@@ -31,7 +31,7 @@ A  -> In Java, a thread always exists in any one of the following states. These 
 		-	Runnable:
 			A thread, that is ready to run is then moved to the runnable state. 
 			In the runnable state, the thread may be running or may be ready to run at any given instant of time. 
-			It is the duty of the thread scheduler to provide the thread time to run, i.e., moving the thread the running state.
+			It is the duty of the thread scheduler to provide the thread time to run, i.e., moving the thread to running state.
 			A program implementing multithreading acquires a fixed slice of time to each individual thread. 
 			Each and every thread runs for a short span of time and when that allocated time slice is over, the thread voluntarily gives up the CPU to the other thread, 
 			so that the other threads can also run for their slice of time. 

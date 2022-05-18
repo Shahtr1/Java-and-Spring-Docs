@@ -1,3 +1,5 @@
+Q0 - What are Java Streams?
+
 Stream API is used to process collections of objects.
 A stream is a sequence of objects that supports various methods 
 which can be pipelined to produce the desired result.

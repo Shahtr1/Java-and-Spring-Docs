@@ -142,6 +142,12 @@ SPECIAL NOTE about BindingResult Parameter Order:
             ...            
         }
         
+Q13 -> What is @RestController?
+A   -> @RestController is a convenience annotation for creating Restful controllers. 
+It is a specialization of @Component and is autodetected through classpath scanning. 
+It adds the @Controller and @ResponseBody annotations. It converts the response to JSON or XML. 
+It does not work with the view technology, so the methods cannot return ModelAndView. 
+It is typically used in combination with annotated handler methods based on the @RequestMapping annotation.
 
 	
 

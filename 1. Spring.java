@@ -1,3 +1,5 @@
+Q0 -> Introduce Spring framework?
+
 The Spring Framework core is, simply put, an IoC container used to manage beans.
 There are two basic types of containers in Spring – the Bean Factory and the Application Context. 
 The former provides basic functionalities, which are introduced here; the latter is a superset of the former and is most widely used.

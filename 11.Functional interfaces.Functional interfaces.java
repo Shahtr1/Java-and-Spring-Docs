@@ -1,10 +1,15 @@
-The interface who contains only one abastract method 
+Q0 -> How many Functional Interfaces?
+
+The interface who contains only one abstract method 
 but can have multiple default and static method.
 Example:
 	Runnable -----> run()
 	Callable ----->  call()
 	Comparable -----> compareTo()
 	Comparator -----> compare()
+	Consumer ------> accept()
+	Predicate -------> test()
+	Supplier --------> get()
 
 It has annotation @FunctionalInterface
 
@@ -132,30 +137,6 @@ A  -> //////// Code Starts //////
 	}
 
 	///////	END //////
-
-Q5 -> Explain Comparator FunctionalInterface?
-A  -> A comparator interface is used to order the objects of user-defined classes.
-	A comparator object is capable of comparing two objects of two different classes. Following function compare obj1 with obj2
-	This interface is present in java.util package and contains 2 methods compare(Object obj1, Object obj2) and equals(Object element).
-
-	The equals is an abstract method overriding one of the public methods of java.lang.Object, this doesn’t count as an abstract method.
-
-	Method of Collections class for sorting List elements is used to sort the elements of List by the given comparator.
-	// To sort a given list. ComparatorClass must implement 
-	// Comparator interface.
-	public void sort(List list, ComparatorClass c)
-
-	How does Collections.Sort() work?
-	Internally the Sort method does call Compare method of the classes it is sorting.
-	To compare two elements, it asks “Which is greater?” 
-	Compare method returns -1, 0, or 1 to say if it is less than, equal, or greater to the other.
-	It uses this result to then determine if they should be swapped for their sort.
-
-	public class BookService {
-		List<Book> books = new BookDAO.getBooks();
-		Collections.sort(books, (o1, o2) -> o2.getName().compareTo(o1.getName()));
-		return books;
-	}
 
 
 
